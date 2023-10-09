@@ -1,4 +1,4 @@
-<div wire.key="{{ $todo->id }}"
+<div wire:key="{{ $todo->id }}"
     class="todo mb-5 card px-5 py-6 bg-white col-span-1 border-t-2 border-blue-500 hover:shadow">
     <div class="flex justify-between space-x-2">
 
@@ -6,17 +6,18 @@
             @if ($todo->completed)
                 <input wire:click="toggle({{ $todo->id }})" class="mr-2" type="checkbox" checked>
             @else
-                <input wire:click="toggle({{ $todo->id }})" class='mr-2' type="checkbox" name=""
-                    id="">
+                <input wire:click="toggle({{ $todo->id }})" class='mr-2' type="checkbox">
             @endif
 
             @if ($EditingTodoID === $todo->id)
-                <input wire:model="EditingTodoName" type="text" placeholder="Todo.."
-                    class="bg-gray-100  text-gray-900 text-sm rounded block w-full p-2.5">
+                <div>
+                    <input wire:model="EditingTodoName" type="text" placeholder="Todo.."
+                        class="bg-gray-100  text-gray-900 text-sm rounded block w-full p-2.5">
 
-                @error('EditingTodoName')
-                    <span class="text-red-500 text-xs block">{{ $message }}</span>
-                @enderror
+                    @error('EditingTodoName')
+                        <span class="mt-1 text-red-500 text-xs block">{{ $message }}</span>
+                    @enderror
+                </div>
             @else
                 <h3 class="text-lg text-semibold text-gray-800">{{ $todo->name }}</h3>
             @endif
@@ -47,7 +48,6 @@
     </div>
     <span class="text-xs text-gray-500"> {{ $todo->created_at }} </span>
     <div class="mt-3 text-xs text-gray-700">
-
         @if ($EditingTodoID === $todo->id)
             <button wire:click="update"
                 class="mt-3 px-4 py-2 bg-teal-500 text-white font-semibold rounded hover:bg-teal-600">Update</button>
