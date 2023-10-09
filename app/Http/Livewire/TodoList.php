@@ -50,9 +50,18 @@ class TodoList extends Component
     {
         $this->reset('EditingTodoID', 'EditingTodoName');
     }
+    public function update()
+    {
+        $this->validateOnly('EditingTodoName');
+
+        Todo::find($this->EditingTodoID)->update([
+            'name' => $this->EditingTodoName
+        ]);
+
+        $this->cancelEdit();
+    }
     public function render()
     {
-
         return view('livewire.todo-list', [
             'todos' => Todo::latest()->where('name', 'like', "%{$this->search}%")->paginate(5)
         ]);
