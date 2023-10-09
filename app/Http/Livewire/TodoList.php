@@ -28,6 +28,11 @@ class TodoList extends Component
         //send flash message
         session()->flash('success', 'Created');
     }
+
+    public function delete($todoID)
+    {
+        Todo::find($todoID)->delete();
+    }
     public function render()
     {
 
