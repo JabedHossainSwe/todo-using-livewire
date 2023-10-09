@@ -4,9 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Models\Todo;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class TodoList extends Component
 {
+    use WithPagination;
     public $name;
     public $search;
     protected $rules = [
@@ -30,7 +32,7 @@ class TodoList extends Component
     {
 
         return view('livewire.todo-list', [
-            'todos' => Todo::latest()->get()
+            'todos' => Todo::latest()->paginate(5)
         ]);
     }
 }
