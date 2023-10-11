@@ -9,7 +9,7 @@
         @endforeach
 
         <div class="my-2">
-            {{ $todos->Links() }}
+            {{ $todos->links() }}
         </div>
     </div>
 </div>
